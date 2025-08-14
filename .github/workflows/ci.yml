@@ -1,0 +1,35 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          if [ -f ai-automation-platform/package.json ]; then cd ai-automation-platform && npm ci; fi
+
+      - name: Run tests
+        run: |
+          cd ai-automation-platform
+          npm test -- --ci --reporters=default
+
+      - name: Upload test results (if any junit)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: ai-automation-platform/test-results || ./

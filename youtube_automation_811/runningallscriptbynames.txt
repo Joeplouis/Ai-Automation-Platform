@@ -1,0 +1,57 @@
+cd /root/stack
+# upload all scripts + 00.env here and make them executable
+chmod +x *.sh
+
+# 1) Prep
+./01_prep.sh
+
+# 2) Mailcow
+./10_mailcow_install.sh
+
+# 3) Mautic
+./20_mautic_install.sh
+
+# 4) n8n
+./30_n8n_install.sh
+
+# 5) Nginx sites (reverse proxy)
+./40_nginx_sites.sh
+
+# 6) Certbot TLS
+./45_certbot_certs.sh
+
+# 7) Show DNS template to paste for subdomains
+./60_dns_print.sh
+
+# 8) (Optional) Bulk domains + mailboxes
+#    First: edit 00.env MAILCOW_API_KEY with a key from Mailcow UI
+#    Prepare domains.csv as shown, then:
+./70_mailcow_api_bulk.sh domains.csv
+Notes / Next steps
+After Mailcow UI is reachable at https://mail.bookaistudio.com, create your Mailcow API key, paste into 00.env, then use 70_mailcow_api_bulk.sh to add:
+
+bessouhairbeauty.com with bessou@, admin@
+
+unifiedbusinessblog.com with admin@, sales@
+
+Later: your 33 subdomains (one line each)
+
+In Mautic (https://mautic.bookaistudio.com), finish installer, set Mailer to SMTP via Mailcow (or your relay).
+
+In n8n (https://api.bookaistudio.com), create your webhook workflows for:
+
+/domains, /mailboxes, /inbox, /emails/send, /campaigns, /social/schedule, /scripts/generate
+
+(If you want, I can export starter JSONs you can import.)
+
+Want me to generate the n8n starter workflows (JSON export) next so you can import and immediately have those API routes?
+
+
+
+
+
+
+
+
+
+Ask ChatGPT

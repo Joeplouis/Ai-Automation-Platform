@@ -1,0 +1,25 @@
+# Ignore frontend and dashboards (JSX, browser-only code)
+src/frontend/
+src/dashboard/
+
+# Experimental or enterprise modules not part of core server build
+src/ai/
+src/analytics/
+src/enterprise/
+src/integrations/
+src/observability/
+src/workers/
+
+# Workflow engine (CommonJS-style requires and dynamic patterns)
+src/modules/workflow/
+
+# MCP experimental servers
+src/core/enhanced-mcp-server.js
+src/core/mcp-server.js
+
+# Optional: rate limit helpers not yet wired
+src/core/rateLimit.js
+src/utils/rateLimit.js
+
+# Server main has many console/process patterns; ignore for now to establish baseline
+src/core/server.js

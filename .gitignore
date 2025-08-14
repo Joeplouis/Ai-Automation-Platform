@@ -34,3 +34,8 @@ logs/
 # Misc
 *.swp
 *.swo
+
+
+# Deployment secrets
+extracted/convert-3500-code/00.env
+extracted/convert-3500-code/*.env
